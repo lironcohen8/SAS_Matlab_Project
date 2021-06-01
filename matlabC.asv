@@ -1,0 +1,17 @@
+%a
+t = -10000:10000;
+x1 = sinc(t./6);
+x2 = cos(pi.*t./12)+sin(pi.*t./6);
+fft_x1= fftshift(fft(x1));
+fft_x2= fftshift(fft(x2));
+plot(t,abs(fft_x1));
+title('fft x1 - Part c')
+ylabel('X(j\Omega)');
+xlabel('\Omega [rad/sec]');
+plot(t,abs(fft_x2));
+title('fft x2 - Part c')
+ylabel('X(j\Omega)');
+xlabel('\Omega [rad/sec]');
+
+%d
+x1 = 
