@@ -86,43 +86,41 @@ plot(w,abs(fft_yn6));
 title('output signal Yn6 - Part B')
 xlabel('\omega [rad]');
 ylabel('Yn6');
-clear;
-close;
+
 %e
-w = linspace(-pi,pi,2*10000+1);
-n = -10:10;
 xn = cos((2.*pi./5).*n) + cos(((pi)./5).*n);
 yn2 = cos((2.*pi./5).*n) + cos(((pi)./5).*n);
 yn3 = cos(((pi)./5).*n);
 yn4 = cos(((pi)./5).*n);
 yn6 = 0;
+w = linspace(-pi,pi,2*10000+1);
+n = -10000:10000;
 %h2
-%stem(n,abs(yn2));
-hold on
-%stem(n, abs(xn));
-hold off
+subplot(2,2,1);
+plot(n,abs(yn2));
+hold on;
+%plot(n,abs(xn));
+hold off;
 title('x[n] and y3[n] - Part B')
 xlabel('n [sec]');
 ylabel('yn2');
 
 %h3
-stem(n,abs(yn3),n, abs(xn));
-hold on;
-plot(n, abs(xn));
-hold off;
+%subplot(2,2,2);
+%plot(n,abs(yn3),n, abs(xn));
 title('x[n] and y3[n] - Part B')
 xlabel('n [sec]');
 ylabel('yn3');
 
 %h4
-%title('x[n] and y4[n] - Part B')
+%subplot(2,2,3);
+%plot(n,abs(yn4),n, abs(xn));
+title('x[n] and y4[n] - Part B')
 xlabel('n [sec]');
 ylabel('yn4');
 %h6
-%stem(n,abs(yn6));
-hold on;
-plot(n, abs(xn));
-hold off;
+%subplot(2,2,4);
+%plot(n,abs(yn6),n, abs(xn));
 title('x[n] and y6[n] - Part B')
 xlabel('n [sec]');
 ylabel('yn6');
