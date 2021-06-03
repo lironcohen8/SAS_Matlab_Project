@@ -16,22 +16,26 @@ xlabel('n [sec]');
 ylabel('y_2n');
 
 %h3
-stem(n,abs(yn3),n, abs(xn));
+stem(n,abs(yn3));
 hold on;
-plot(n, abs(xn));
+stem(n, abs(xn));
 hold off;
 title('x[n] and y_3[n]')
 xlabel('n [sec]');
 ylabel('y_3n');
 
 %h4
-title('x[n] and y4[n]')
+stem(n,abs(yn4));
+hold on;
+stem(n, abs(xn));
+hold off;
+title('x[n] and y_4[n]')
 xlabel('n [sec]');
 ylabel('y_4n');
 %h6
 stem(n,abs(yn6));
 hold on;
-plot(n, abs(xn));
+stem(n, abs(xn));
 hold off;
 title('x[n] and y_6[n]')
 xlabel('n [sec]');
