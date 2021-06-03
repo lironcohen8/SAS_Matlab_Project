@@ -1,35 +1,40 @@
-%Part B
-load('LPF.mat');
-w = linspace(-pi,pi,80);
+%e
+w = linspace(-pi,pi,2*10000+1);
+n = -10:10;
+xn = cos((2.*pi./5).*n) + cos(((pi)./5).*n);
+yn2 = cos((2.*pi./5).*n) + cos(((pi)./5).*n);
+yn3 = cos(((pi)./5).*n);
+yn4 = cos(((pi)./5).*n);
+yn6 = 0;
 %h2
-subplot(2,2,1);
-fft_h2 = fftshift(fft(h2));
-plot(w,abs(fft_h2));
-title('Transfer Function H2')
-xlabel('\omega [rad/]');
-ylabel('H2');
+stem(n,abs(yn2));
+hold on
+stem(n, abs(xn));
+hold off
+title('x[n] and y_3[n]')
+xlabel('n [sec]');
+ylabel('y_2n');
 
 %h3
-subplot(2,2,2);
-fft_h3 = fftshift(fft(h3));
-plot(w,abs(fft_h3));
-title('Transfer Function H3 ')
-xlabel('\omega [rad]');
-ylabel('H3');
+stem(n,abs(yn3),n, abs(xn));
+hold on;
+plot(n, abs(xn));
+hold off;
+title('x[n] and y_3[n]')
+xlabel('n [sec]');
+ylabel('y_3n');
 
 %h4
-subplot(2,2,3);
-fft_h4 = fftshift(fft(h4));
-plot(w,abs(fft_h4));
-title('Transfer Function H4')
-xlabel('\omega [rad]');
-ylabel('H4');
-
+%title('x[n] and y4[n] - Part B')
+xlabel('n [sec]');
+ylabel('y_4n');
 %h6
-subplot(2,2,4);
-fft_h6 = fftshift(fft(h6));
-plot(w,abs(fft_h6));
-title('Transfer Function H6')
-xlabel('\omega [rad]');
-ylabel('H6');
+%stem(n,abs(yn6));
+hold on;
+plot(n, abs(xn));
+hold off;
+title('x[n] and y_6[n]')
+xlabel('n [sec]');
+ylabel('y_6n');
+
 
