@@ -29,3 +29,13 @@ stem(n,abs(fft_xn2));
 title('fft xn2 - Part c')
 ylabel('X(e.^j\Omega)');
 xlabel('n [sec]');
+
+clear;
+close;
+%e
+t = -10000:10000;
+xt1 =  sinc(t./3);
+fft_xt1= fftshift(fft(xt1));
+zoh = c2d(fft_xt1,0.1,'zoh');
+plot(t,zoh);
+
