@@ -39,3 +39,20 @@ fft_xt1= fftshift(fft(xt1));
 zoh = c2d(fft_xt1,0.1,'zoh');
 plot(t,zoh);
 
+%f
+
+n = -50:50;
+xn1 =  sinc(3.*n./2);
+fft_xn1= fftshift(fft(xn1));
+stem(n,abs(fft_xn1));
+title('xn_1 - FFT ')
+ylabel('|X(e.^{j\Omega})|');
+xlabel('n [sec]');
+
+xn2 = cos(pi.*3.*n./4)+sin(pi.*3.*n./2);
+fft_xn2= fftshift(fft(xn2));
+stem(n,abs(fft_xn2));
+title('xn_2 - FFT')
+ylabel('|X(e.^{j\Omega}|)');
+xlabel('n [sec]');
+
