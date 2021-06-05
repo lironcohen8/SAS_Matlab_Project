@@ -1,48 +1,15 @@
-%e
-w = linspace(-pi,pi,2*10000+1);
-n = -10:10;
-xn = cos((2.*pi./5).*n) + cos(((pi)./5).*n);
-yn2 = cos((2.*pi./5).*n) + cos(((pi)./5).*n);
-yn3 = cos(((pi)./5).*n);
-yn4 = cos(((pi)./5).*n);
-yn6 = 0;
-%h2
-subplot(2,2,1);
-stem(n,abs(yn2));
-hold on
-plot(n, abs(xn));
-hold off
-title('x[n] and y_3[n]')
+%d
+n = -50:50;
+xn1 =  sinc(n./3);
+fft_xn1= fftshift(fft(xn1));
+stem(n,abs(fft_xn1));
+title('fft xn1 - Part c')
+ylabel('X(e.^j\Omega)');
 xlabel('n [sec]');
-ylabel('y_2n');
 
-%h3
-subplot(2,2,2);
-plot(n,abs(yn3));
-hold on;
-plot(n, abs(xn));
-hold off;
-title('x[n] and y_3[n]')
+xn2 = cos(pi.*n./6)+sin(pi.*n./3);
+fft_xn2= fftshift(fft(xn2));
+stem(n,abs(fft_xn2));
+title('fft xn2 ')
+ylabel('X(e.^j\Omega)');
 xlabel('n [sec]');
-ylabel('y_3n');
-
-%h4
-subplot(2,2,3);
-plot(n,abs(yn4));
-hold on;
-plot(n, abs(xn));
-hold off;
-title('x[n] and y_4[n]')
-xlabel('n [sec]');
-ylabel('y_4n');
-%h6
-subplot(2,2,4);
-%stem(n,abs(yn6));
-%hold on;
-plot(n, abs(xn));
-%hold off;
-title('x[n] and y_6[n]')
-xlabel('n [sec]');
-ylabel('y_6n');
-
-
