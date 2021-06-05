@@ -27,7 +27,7 @@ xn2 = cos(pi.*n./6)+sin(pi.*n./3);
 fft_xn2= fftshift(fft(xn2));
 stem(n,abs(fft_xn2));
 title('xn_2 - FFT')
-ylabel('X(e.^{j\Omega})');
+ylabel('|X(e.^{j\Omega}|)');
 xlabel('n [sec]');
 
 clear;
