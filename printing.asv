@@ -7,36 +7,40 @@ yn3 = cos(((pi)./5).*n);
 yn4 = cos(((pi)./5).*n);
 yn6 = 0;
 %h2
+subplot(2,2,1);
 stem(n,abs(yn2));
 hold on
-stem(n, abs(xn));
+plot(n, abs(xn));
 hold off
 title('x[n] and y_3[n]')
 xlabel('n [sec]');
 ylabel('y_2n');
 
 %h3
-stem(n,abs(yn3));
+subplot(2,2,2);
+plot(n,abs(yn3));
 hold on;
-stem(n, abs(xn));
+plot(n, abs(xn));
 hold off;
 title('x[n] and y_3[n]')
 xlabel('n [sec]');
 ylabel('y_3n');
 
 %h4
-stem(n,abs(yn4));
+subplot(2,2,3);
+plot(n,abs(yn4));
 hold on;
-stem(n, abs(xn));
+plot(n, abs(xn));
 hold off;
 title('x[n] and y_4[n]')
 xlabel('n [sec]');
 ylabel('y_4n');
 %h6
-stem(n,abs(yn6));
-hold on;
-stem(n, abs(xn));
-hold off;
+subplot(2,2,4);
+%stem(n,abs(yn6));
+%hold on;
+plot(n, abs(xn));
+%hold off;
 title('x[n] and y_6[n]')
 xlabel('n [sec]');
 ylabel('y_6n');
