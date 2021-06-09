@@ -1,4 +1,11 @@
 %PartA
+
+%sympref('HeavisideAtOrigin', 1);
+%syms n;
+%h_def = (((0.5)^n.*heaviside(n)) + ((0.75)^n.*heaviside(n-2)));
+%H = ztrans(h_def); 
+%disp(H);
+
 %D -Impulse response
 n = -10:10;
 u0 = n>=0;
