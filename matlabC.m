@@ -43,15 +43,13 @@ ylabel('|X(e.^{j\omega})|');
 xlabel('n [sec]');
 
 %e
+%e -xn1 zoh
 T=2;
 N=10;
 L=T*N;
-xn1 =  sinc(T.*n./6);
-t = linspace(-100,100,length(xn1)*L);
 n = -100:100;
-xt1 =  sinc(t./3);
-hold 
-fft_xt1= fftshift(fft(xt1));
+t = linspace(-100,100,length(xn1)*L);
+xn1 =  sinc(T.*n./6);
 for i=1:length(xn1)-1
     for j=1:L
         zoh(i*L+j) = xn1(i);
@@ -65,6 +63,52 @@ hold off;
 title('xn_1 - ZOH ')
 ylabel('|xn_1|');
 xlabel('n [sec]');
+
+%e- xn2 zoh
+T=2;
+N=10;
+L=T*N;
+n = -100:100;
+xn2 = cos(T.*pi.*n./12)+sin(T.*pi.*n./6);
+t = linspace(-100,100,length(xn2)*L);
+for i=1:length(xn2)-1
+    for j=1:L
+        zoh(i*L+j) = xn2(i);
+    end;
+end;   
+figure;
+plot(t,zoh);
+hold on;
+plot(n,xn2);
+hold off;
+title('xn_2 - ZOH ')
+ylabel('|xn_2|');
+xlabel('n [sec]');
+
+%e- xn1 foh
+
+T=2;
+N=10;
+L=T*N;
+n = -100:100;
+t = linspace(-100,100,length(xn1)*L);
+xn1 =  sinc(T.*n./6);
+for i=1:length(xn1)-1
+    for j=1:L
+        foh(i*L+j) = xn1(i)+(j/L)*(xn1(i+1)-xn1(i))
+    end;
+end;   
+figure;
+plot(t,foh);
+hold on;
+plot(n,xn1);
+hold off;
+title('xn_1 - FOH ')
+ylabel('|xn_1|');
+xlabel('n [sec]');
+
+
+
 
 
 %f
