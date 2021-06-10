@@ -90,9 +90,9 @@ xlabel('n [sec]');
 T=2;
 N=10;
 L=T*N;
-n = -100:100;
+n = -50:50;
 xn1 =  sinc(T.*n./6);
-t = linspace(-100,100,length(xn1)*L);
+t = linspace(-50,50,length(xn1)*L);
 for i=1:length(xn1)-1
     for j=1:L
         foh(i*L+j) = xn1(i)+(j/L)*(xn1(i+1)-xn1(i))
