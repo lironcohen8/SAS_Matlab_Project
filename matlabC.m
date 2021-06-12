@@ -170,11 +170,11 @@ plot(t,ideal);
 hold on;
 plot(n,xn2);
 hold off;
-title('xn_1 - Ideal');
+title('xn_2 - Ideal');
 ylabel('xn_2');
 xlabel('n[sec]');
 
-%f
+%f - d
 
 n = -50:50;
 xn1 =  sinc(3.*n./2);
@@ -190,4 +190,6 @@ stem(n,abs(fft_xn2));
 title('xn_2 - FFT')
 ylabel('|X(e.^{j\omega})|');
 xlabel('n [sec]');
+
+%f - e - zoh
 
