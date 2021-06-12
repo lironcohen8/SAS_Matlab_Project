@@ -1,13 +1,11 @@
-h = (((0.5).^n.*heaviside(n)) + ((0.75).^n.*heaviside(n-2)));
-H = ztrans(h); 
-z = -10:10;
-
 %F - pole zero map
-numerator = [32,-24,18,-9];
-denominator = [32,-40,12,0];
+sympref('HeavisideAtOrigin', 1);
+h = (((0.5).^n.*heaviside(n)) + ((0.75).^n.*heaviside(n-2)));
+H = ztrans(h);
+[numerator, denominator] = numden(H);
+numerator = sym2poly(numerator);
+denominator = sym2poly(denomonstor);
 ts = 1;
-%sys = tf(numerator,denomanator,ts);
-[num,den] = tfdata()
+sys = tf(numerator,denominator,ts);
 sys = tf(H);
 pzmap(sys)
-numden

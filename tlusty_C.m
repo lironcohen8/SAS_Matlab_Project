@@ -16,9 +16,9 @@ function [] = plotInTime(tcont, x, title_1)
 end
 
 function [] = plotInSteps(N, x, title_1)
-    n= -N:N;
+    n= -N/2:N/2;
     figure;
-    stem(n, x(1:2 * N + 1));
+    stem(n, x(1:N + 1));
     title(title_1);
     xlabel('steps [n]');
     ylabel('amplitude');
@@ -36,7 +36,7 @@ end
  
  function sectionA_x1(x1)
     % wcont - Frequncy vector for 10000 points from 0 to pi
-    wcont = linspace(-pi, pi, 1000);
+    wcont = linspace(-pi, pi, length(x1));
     % X1 - ft of x1
     X1 = fftshift(fft(x1));
     % plot X1
@@ -44,7 +44,7 @@ end
  end
  
   function partC_X1() 
-    points = 1000;
+    points = 1001;
     % w0 - signal frequency 1/6 rad/s
     w0 = 1/6;
     % Ttot - Total signal time
@@ -54,24 +54,25 @@ end
     t = linspace(-(Ttot/2), (Ttot/2), points);
     % x1 - "continuous" sinc signal
     x1 = sinc(w0 .* t);
+    length(x1)
     % plot the input signal
     plotInTime(t, x1, 'input signal x1');
     % plot X1
     sectionA_x1(x1)
     
-    N=100;
-    T=4;
-    n = linspace(-N, N , 2*N+1);
+    T = 4;
+    N = Ttot / T;
+    n = linspace(-N/2 , N/2 , N+1);
     
     x1n = sinc(w0 * T .* n);
     plotInSteps(N, x1n, "x1[n]");
     
     D(x1n, 1);
-    E(x1n, 1, T, Ttot);
+    E(x1n, 1, t, T);
   end
   
   function partC_X2() 
-    points = 1000;
+    points = 1001;
     % Ttot - Total signal time
     Ttot = 200;
     % tcont - Time vector for 10000 points from -Ttot/2 to Ttot/2
@@ -83,15 +84,15 @@ end
     % plot X1
     % sectionA_x1(x1)
     
-    N=100;
-    T=4;
-    n = linspace(-N, N , 2*N+1);
+    T = 4;
+    N = Ttot / T;
+    n = linspace(-N/2 , N/2 , N + 1);
     
     x2n = cos((pi/12) * T .* n) + sin((pi/6) * T .* n);
     plotInSteps(N, x2n, "x2[n]");
     
     D(x2n, 2); % check heights
-    E(x2n, 2, T, Ttot);
+    E(x2n, 2, t, T);
   end
   
   function D(xn, nubmer)
@@ -100,52 +101,56 @@ end
     plotHarmony(w, X, "X"+nubmer+"(e^jw)");
   end
   
-  function E(xn, number, T, Ttot)
-    printZoh(xn, number, T, Ttot);
-    printFow(xn, number, T, Ttot);
-    perfectRestoirng(xn, number, T, Ttot);
-  end
-  
-  function printZoh(xn, number, T, Ttot)
-    N = 10; %number of steps per second
-    L = T * N;
-    t = linspace(-Ttot/2, Ttot/2, length(xn) * L);
-    for i=1:length(xn) - 1
-        for j=1:L
-            zoh(i * L + j) = xn(i);
+  function E(xn, number, t, T)
+    xs = zeros(T * size(xn));
+    j = 1;
+    for i=1:length(xs)
+        if mod(i, T) == 0
+            xs(i)= xn(j);
+            j = j + 1;
         end
     end
+        
+    printZoh(xn, number, t);
+    printFow(xn, number, t);
+    perfectRestoirng(xn, number, t, T);
+  end
+  
+  function printZoh(xn, number, t)
+    L = floor((length(t)-1) / (length(xn)-1));
+    for i=1:length(xn)-1
+        for j=1:L
+            zoh((i-1) * L + j) = xn(i);
+        end
+    end
+    zoh(length(t)) = xn(length(xn));
     plotInTime(t, zoh, "ZOH x" + number);
   end
   
-  function printFow(xn, number, T, Ttot)
-    N = 10; %number of steps per second
-    L = T * N;
-    t = linspace(-Ttot/2, Ttot/2, length(xn) * L);
+  function printFow(xn, number, t)
+    L = floor((length(t)-1) / (length(xn)-1));
     for i=1:length(xn) - 1
         for j=1:L
-            foh(i * L + j) = ((L-j) / L) * xn(i) + (j / L)* xn(i+1);
+            foh((i-1) * L + j) = ((L-j) / L) * xn(i) + (j / L)* xn(i+1);
         end
     end
+    foh(length(t)) = xn(length(xn));
     plotInTime(t, foh, "FOH x" + number);
   end
   
-  function perfectRestoirng(xn, number, T, Ttot)
-    t = linspace(-Ttot/2, Ttot/2, length(xn));
-    length(xn)
-    y = conv(xn, sinc((1/T) * t));
+  function perfectRestoirng(xn, number, t, T)
+    x_diraccomb = zeros(size(t));
+    j = 1;
+    for i=1:length(t)
+        if mod(t(i), T) == 0
+            x_diraccomb(i)= xn(j);
+            j = j + 1;
+        end
+    end
+    y = conv(x_diraccomb, sinc((1/T) * t), 'same');
     length(y)
     length(t)
-    plotInTime(t, y, 'input signal x111');
-    
-    %X = fftshift(fft(xn));
-    %syms x
-    %rect = T * rectangularPulse(-pi/T, pi/T, x)
-    %Y = X .* rect;
-    %w = linspace(-pi, pi, length(X));
-    %plotHarmony(w, X, "X");
-    %y = ifft(Y);
-    %plotInTime(t, y, 'input signal x111');
+    plotInTime(t, y, "Ideal restoing x" + number);
   end
  
  
