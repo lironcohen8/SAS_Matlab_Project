@@ -3,9 +3,9 @@ close all;
 clearvars;
 
 %a
-t = linspace(-100,100,1000);
+t = linspace(-100,100,200);
 x1 = sinc(t./6);
-w = linspace(-pi,pi,1000);
+w = linspace(-pi,pi,200);
 x2 = cos(pi.*t./12)+sin(pi.*t./6);
 fft_x1= fftshift(fft(x1));
 fft_x2= fftshift(fft(x2));
@@ -28,7 +28,7 @@ w = linspace(-pi,pi,100);
 xn1 =  sinc(T.*n./6);
 fft_xn1= fftshift(fft(xn1));
 figure;
-stem(w,abs(fft_xn1));
+plot(w,abs(fft_xn1));
 title('Xn_1(e^{j\omega})')
 ylabel('|X(e^{j\omega})|');
 xlabel('\omega[rad/sec]');
@@ -36,7 +36,7 @@ xlabel('\omega[rad/sec]');
 xn2 = cos(T.*pi.*n./12)+sin(T.*pi.*n./6);
 fft_xn2= fftshift(fft(xn2));
 figure;
-stem(w,abs(fft_xn2));
+plot(w,abs(fft_xn2));
 title('Xn_2(e^{j\omega})')
 ylabel('|X(e^{j\omega})|');
 xlabel('\omega[rad/sec]');
@@ -49,6 +49,7 @@ L = T*N;
 n = -50:50;
 t = linspace(-50,50,length(xn1)*L);
 xn1 = sinc(T.*n./6);
+x1 = sinc(t./6);
 for i = 1:length(xn1)-1
     for j = 1:L
         zoh(i*L+j) = xn1(i);
@@ -57,11 +58,11 @@ end
 figure;
 plot(t,zoh);
 hold on;
-plot(n,xn1);
+plot(t,x1);
 hold off;
 title('xn_1 - ZOH')
-ylabel('xn_1');
-xlabel('n[sec]');
+ylabel('x_1');
+xlabel('t[sec]');
 
 %e - xn2 zoh
 T = 2;
