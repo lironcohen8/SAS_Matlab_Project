@@ -3,44 +3,43 @@ close all;
 clearvars;
 
 %a
-t = -100:100;
+t = linspace(-100,100,1000);
 x1 = sinc(t./6);
+w = linspace(-pi,pi,1000);
 x2 = cos(pi.*t./12)+sin(pi.*t./6);
 fft_x1= fftshift(fft(x1));
 fft_x2= fftshift(fft(x2));
 figure;
-plot(t,abs(fft_x1));
-title('X_1 - FFT')
+plot(w,abs(fft_x1));
+title('X_1(j\Omega)')
 ylabel('|X(j\Omega)|');
 xlabel('\Omega [rad/sec]');
 
 figure;
-plot(t,abs(fft_x2));
-title('X_2 - FFT')
+plot(w,abs(fft_x2));
+title('X_2(j\Omega)');
 ylabel('|X(j\Omega)|');
 xlabel('\Omega [rad/sec]');
 
 %d
-n = -50:50;
+n = linspace(-50,50,100);
 T=2;
-
-x1 = sinc(t./6);
+w = linspace(-pi,pi,100);
 xn1 =  sinc(T.*n./6);
 fft_xn1= fftshift(fft(xn1));
 figure;
-stem(n,abs(fft_xn1));
-title('xn_1 - FFT ')
-ylabel('|X(e.^{j\omega})|');
-xlabel('n [sec]');
+stem(w,abs(fft_xn1));
+title('Xn_1(e^{j\omega})')
+ylabel('|X(e^{j\omega})|');
+xlabel('\omega[rad/sec]');
 
-x2 = cos(pi.*t./12)+sin(pi.*t./6);
 xn2 = cos(T.*pi.*n./12)+sin(T.*pi.*n./6);
 fft_xn2= fftshift(fft(xn2));
 figure;
-stem(n,abs(fft_xn2));
-title('xn_2 - FFT')
-ylabel('|X(e.^{j\omega})|');
-xlabel('n [sec]');
+stem(w,abs(fft_xn2));
+title('Xn_2(e^{j\omega})')
+ylabel('|X(e^{j\omega})|');
+xlabel('\omega[rad/sec]');
 
 %e
 %e -xn1 zoh

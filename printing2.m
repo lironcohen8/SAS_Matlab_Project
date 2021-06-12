@@ -1,20 +1,11 @@
-%e- xn2 foh
+n = linspace(-50,50,100);
 T=2;
-N=10;
-L=T*N;
-n = -50:50;
+w = linspace(-pi,pi,100);
+x2 = cos(pi.*t./12)+sin(pi.*t./6);
 xn2 = cos(T.*pi.*n./12)+sin(T.*pi.*n./6);
-t = linspace(-50,50,length(xn2)*L);
-for i=1:length(xn2)-1
-    for j=1:L
-        foh(i*L+j) = xn2(i)+(j/L)*(xn2(i+1)-xn2(i))
-    end;
-end;   
+fft_xn2= fftshift(fft(xn2));
 figure;
-plot(t,foh);
-hold on;
-plot(n,xn2);
-hold off;
-title('xn_2 - FOH ')
-ylabel('|xn_2|');
-xlabel('n [sec]');
+stem(w,abs(fft_xn2));
+title('Xn_2(e^{j\omega})')
+ylabel('|X(e^{j\omega})|');
+xlabel('\omega[rad/sec]');
