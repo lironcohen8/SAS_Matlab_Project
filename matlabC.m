@@ -191,5 +191,135 @@ title('xn_2 - FFT')
 ylabel('|X(e.^{j\omega})|');
 xlabel('n [sec]');
 
-%f - e - zoh
+%f - e - xn1 zoh
+T = 9;
+N = 10;
+L = T*N;
+n = -50:50;
+xn1 = sinc(T.*n./6);
+t = linspace(-50,50,length(xn1)*L);
+for i = 1:length(xn1)-1
+    for j = 1:L
+        zoh(i*L+j) = xn1(i);
+    end
+end   
+figure;
+plot(t,zoh);
+hold on;
+plot(n,xn1);
+hold off;
+title('xn_1 - ZOH - T = 9')
+ylabel('xn_1');
+xlabel('n[sec]');
+
+%f - e - xn2 zoh
+T = 9;
+N = 10;
+L = T*N;
+n = -50:50;
+xn2 = cos(T.*pi.*n./12)+sin(T.*pi.*n./6);
+t = linspace(-50,50,length(xn2)*L);
+for i = 1:length(xn2)-1
+    for j = 1:L
+        zoh(i*L+j) = xn2(i);
+    end
+end   
+figure;
+plot(t,zoh);
+hold on;
+plot(n,xn2);
+hold off;
+title('xn_2 - ZOH - T = 9')
+ylabel('xn_2');
+xlabel('n[sec]');
+
+
+%f - e - xn1 foh
+T = 9;
+N = 10;
+L = T*N;
+n = -50:50;
+xn1 =  sinc(T.*n./6);
+t = linspace(-50,50,length(xn1)*L);
+for i = 1:length(xn1)-1
+    for j = 1:L
+        foh(i*L+j) = xn1(i)+(j/L)*(xn1(i+1)-xn1(i));
+    end
+end   
+figure;
+plot(t,foh);
+hold on;
+plot(n,xn1);
+hold off;
+title('xn_1 - FOH - T = 9')
+ylabel('xn_1');
+xlabel('n[sec]');
+
+%f - e - xn2 foh
+T = 9;
+N = 10;
+L = T*N;
+n = -100:100;
+xn2 = cos(T.*pi.*n./12)+sin(T.*pi.*n./6);
+t = linspace(-100,100,length(xn2)*L);
+for i = 1:length(xn2)-1
+    for j=1:L
+        foh(i*L+j) = xn2(i)+(j/L)*(xn2(i+1)-xn2(i));
+    end
+end   
+figure;
+plot(t,foh);
+hold on;
+plot(n,xn2);
+hold off;
+title('xn_2 - FOH - T = 9')
+ylabel('xn_2');
+xlabel('n[sec]');
+
+%f - e - xn1 ideal
+T = 9;
+N = 10;
+n = -50:50;
+xn1 =  sinc(T.*n./6);
+t = linspace(-50,50,length(xn1));
+for i = 1:length(xn1)
+    if mod(i,T) == 0
+        xs(i) = xn1(i);
+    else
+        xs(i) = 0;
+    end
+end 
+ideal = conv(xs, sinc(t./T), 'same');
+figure;
+plot(t,ideal);
+hold on;
+plot(n,xn1);
+hold off;
+title('xn_1 - Ideal - T = 9');
+ylabel('xn_1');
+xlabel('n[sec]');
+
+
+%f - e - xn2 ideal
+T = 9;
+N = 10;
+n = -50:50;
+xn2 = cos(T.*pi.*n./12)+sin(T.*pi.*n./6);
+t = linspace(-50,50,length(xn2));
+for i = 1:length(xn2)
+    if mod(i,T) == 0
+        xs(i) = xn2(i);
+    else
+        xs(i) = 0;
+    end
+end 
+ideal = conv(xs, sinc(t./T), 'same');
+figure;
+plot(t,ideal);
+hold on;
+plot(n,xn2);
+hold off;
+title('xn_2 - Ideal - T = 9');
+ylabel('xn_2');
+xlabel('n[sec]');
 
