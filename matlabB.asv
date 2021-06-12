@@ -104,55 +104,52 @@ xlabel('\omega [rad/sec]');
 ylabel('Y_6(e^{j\omega})');
 
 %e
-n = -50:50;
+w = linspace(-pi,pi,2*10000+1);
+n = -10:10;
 xn = cos((2.*pi./5).*n) + cos(((pi)./5).*n);
+yn2 = cos((2.*pi./5).*n) + cos(((pi)./5).*n);
+yn3 = cos(((pi)./5).*n);
+yn4 = cos(((pi)./5).*n);
+yn6 = 0;
 %h2
-yn2 = conv(xn,h2);
 subplot(2,2,1);
-plot(n,yn2(1:101));
-hold on;
-plot(n, xn);
-hold off;
-title('x[n] and y_2[n]');
+plot(n,abs(yn2));
+hold on
+plot(n, abs(xn));
+hold off
+title('x[n] and y_3[n]')
 xlabel('n [sec]');
-ylabel('x[n] and y_2[n]');
-axis([0 50 -1.5 2.5]);
+ylabel('y_2n');
 
 %h3
-yn3 = conv(xn,h3);
 subplot(2,2,2);
-plot(n,yn3(1:101));
+plot(n,abs(yn3));
 hold on;
-plot(n, xn);
+plot(n, abs(xn));
 hold off;
-title('x[n] and y_3[n]');
+title('x[n] and y_3[n]')
 xlabel('n [sec]');
-ylabel('x[n] and y_3[n]');
-axis([0 50 -1.5 2.5]);
+ylabel('y_3n');
 
 %h4
-yn4 = conv(xn,h4);
 subplot(2,2,3);
-plot(n,yn4(1:101));
+plot(n,abs(yn4));
 hold on;
-plot(n, xn);
+plot(n, abs(xn));
 hold off;
-title('x[n] and y_4[n]');
+title('x[n] and y_4[n]')
 xlabel('n [sec]');
-ylabel('x[n] and y_4[n]');
-axis([0 50 -1.5 2.5]);
-
+ylabel('y_4n');
 %h6
-yn6 = conv(xn,h6);
 subplot(2,2,4);
-plot(n,yn6(1:101));
-hold on;
-plot(n, xn);
-hold off;
-title('x[n] and y_6[n]');
+%stem(n,abs(yn6));
+%hold on;
+plot(n, abs(xn));
+%hold off;
+title('x[n] and y_6[n]')
 xlabel('n [sec]');
-ylabel('x[n] and y_6[n]');
-axis([0 50 -1.5 2.5]);
+ylabel('y_6n');
 
+%f
 
 
