@@ -1,25 +1,22 @@
-clear;
-clearvars;
-T = 2;
-N = 1;
+T = 9;
+N = 5;
 L = T*N;
-n = -50:50;
-xn1 = sinc(T.*n./6);
-
-t = linspace(-50,50,length(xn1));
+points = 200;
+t = linspace(-50,50,points);
 x1 = sinc(t./6);
-for i = 1:L:length(xn1)-1
-    for j = 0:L
-        zoh(i+j) = xn1(i);
+n = linspace(-50,50,points/T);
+xn1 = sinc(n./6);
+for i = 1:length(xn1)-1
+    for j = 1:L
+        zoh((i-1)*L+j) = xn1(i);
     end
 end   
 figure;
-plot(t,zoh);
+t2 = linspace(-50,50,length(zoh));
+plot(t2,zoh);
 hold on;
 plot(t,x1);
-hold on;
-stem(n,xn1)
 hold off;
-title('xn_1 - ZOH')
+title('xn_1 - ZOH - T = 9')
 ylabel('x_1');
 xlabel('t[sec]');
