@@ -190,17 +190,17 @@ xlabel('n[sec]');
 n = -50:50;
 xn1 =  sinc(3.*n./2);
 fft_xn1= fftshift(fft(xn1));
-stem(n,abs(fft_xn1));
-title('xn_1 - FFT ')
-ylabel('|X(e.^{j\omega})|');
-xlabel('n [sec]');
+plot(n,abs(fft_xn1));
+title('X_1(e^{j\omega})')
+ylabel('|X_1(e^{j\omega})|');
+xlabel('\omega[rad/sec]');
 
 xn2 = cos(pi.*3.*n./4)+sin(pi.*3.*n./2);
 fft_xn2= fftshift(fft(xn2));
-stem(n,abs(fft_xn2));
-title('xn_2 - FFT')
-ylabel('|X(e.^{j\omega})|');
-xlabel('n [sec]');
+plot(n,abs(fft_xn2));
+title('X_2(e^{j\omega})')
+ylabel('|X_2(e^{j\omega})|');
+xlabel('\omega[rad/sec]');
 
 %f - e - xn1 zoh
 T = 9;
