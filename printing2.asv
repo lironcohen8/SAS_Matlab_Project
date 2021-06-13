@@ -1,6 +1,4 @@
-clear;
-clearvars;
-T = 2;
+T = 9;
 N = 5;
 L = T*N;
 points = 200;
@@ -8,22 +6,17 @@ t = linspace(-50,50,points);
 n = linspace(-50,50,points/T);
 x2 = cos(pi.*t./12)+sin(pi.*t./6);
 xn2 = cos(pi.*n./12)+sin(pi.*n./6);
-for i = 1:length(xn2)
-    if mod(i,T) == 0
-        xs(i) = xn2(i);
-    else
-        xs(i) = 0;
+for i = 1:length(xn2)-1
+    for j = 1:L
+        zoh((i-1)*L+j) = xn2(i);
     end
-end 
-ideal = conv(xs, sinc(t./T), 'same');
+end   
 figure;
-t2 = linspace(-50,50,length(ideal));
-plot(t2,ideal);
-hold on;
-stem(t2,xn2);
+t2 = linspace(-50,50,length(zoh));
+plot(t2,zoh);
 hold on;
 plot(t,x2);
 hold off;
-title('xn_2 - Ideal')
+title('xn_2 - ZOH - T')
 ylabel('x_2');
 xlabel('t[sec]');

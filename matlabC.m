@@ -137,6 +137,7 @@ hold off;
 title('xn_2 - FOH')
 ylabel('x_2');
 xlabel('t[sec]');
+
 %e - xn1 ideal
 T = 2;
 N = 10;
@@ -203,67 +204,77 @@ xlabel('n [sec]');
 
 %f - e - xn1 zoh
 T = 9;
-N = 10;
+N = 5;
 L = T*N;
-n = -50:50;
-xn1 = sinc(T.*n./6);
-t = linspace(-50,50,length(xn1)*L);
+points = 200;
+t = linspace(-50,50,points);
+x1 = sinc(t./6);
+n = linspace(-50,50,points/T);
+xn1 = sinc(n./6);
 for i = 1:length(xn1)-1
     for j = 1:L
-        zoh(i*L+j) = xn1(i);
+        zoh((i-1)*L+j) = xn1(i);
     end
 end   
 figure;
-plot(t,zoh);
+t2 = linspace(-50,50,length(zoh));
+plot(t2,zoh);
 hold on;
-plot(n,xn1);
+plot(t,x1);
 hold off;
 title('xn_1 - ZOH - T = 9')
-ylabel('xn_1');
-xlabel('n[sec]');
+ylabel('x_1');
+xlabel('t[sec]');
 
 %f - e - xn2 zoh
 T = 9;
-N = 10;
+N = 5;
 L = T*N;
-n = -50:50;
-xn2 = cos(T.*pi.*n./12)+sin(T.*pi.*n./6);
-t = linspace(-50,50,length(xn2)*L);
+points = 200;
+t = linspace(-50,50,points);
+n = linspace(-50,50,points/T);
+x2 = cos(pi.*t./12)+sin(pi.*t./6);
+xn2 = cos(pi.*n./12)+sin(pi.*n./6);
 for i = 1:length(xn2)-1
     for j = 1:L
-        zoh(i*L+j) = xn2(i);
+        zoh((i-1)*L+j) = xn2(i);
     end
 end   
 figure;
-plot(t,zoh);
+t2 = linspace(-50,50,length(zoh));
+plot(t2,zoh);
 hold on;
-plot(n,xn2);
+plot(t,x2);
 hold off;
 title('xn_2 - ZOH - T = 9')
-ylabel('xn_2');
-xlabel('n[sec]');
+ylabel('x_2');
+xlabel('t[sec]');
 
 
 %f - e - xn1 foh
 T = 9;
 N = 10;
 L = T*N;
-n = -50:50;
-xn1 =  sinc(T.*n./6);
-t = linspace(-50,50,length(xn1)*L);
+points = 75;
+t = linspace(-50,50,points);
+n = linspace(-50,50,points/T);
+x1 = sinc(t./6);
+xn1 =  sinc(n./6);
 for i = 1:length(xn1)-1
     for j = 1:L
-        foh(i*L+j) = xn1(i)+(j/L)*(xn1(i+1)-xn1(i));
+        foh((i-1)*L+j) = xn1(i)+(j/L)*(xn1(i+1)-xn1(i));
     end
 end   
 figure;
-plot(t,foh);
+t2 = linspace(-50,50,length(foh));
+plot(t2,foh);
 hold on;
-plot(n,xn1);
+plot(t,x1);
 hold off;
 title('xn_1 - FOH - T = 9')
-ylabel('xn_1');
-xlabel('n[sec]');
+ylabel('x_1');
+xlabel('t[sec]');
+
 
 %f - e - xn2 foh
 T = 9;
