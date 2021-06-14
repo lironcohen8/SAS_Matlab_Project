@@ -1,29 +1,26 @@
 clear;
 clearvars;
 
-T = 2;
-points = 200;
-t = linspace(-100,100,points);
-n = linspace(-100,100,points/T);
+%f - e - xn2 foh
+T = 9;
+N = 10;
+L = T*N;
+points = 100;
+t = linspace(-50,50,points);
+n = linspace(-50,50,points/T);
 x2 = cos(pi.*t./12)+sin(pi.*t./6);
 xn2 = cos(pi.*n./12)+sin(pi.*n./6);
-j=1;
-for i = 1:length(t)
-    if mod(i,T) == 0
-       xs(i) = xn2(j);
-       j = j+1;
-    else
-       xs(i) = 0;
+for i = 1:length(xn2)-1
+    for j = 1:L
+        foh((i-1)*L+j) = xn2(i)+(j/L)*(xn2(i+1)-xn2(i));
     end
-end 
-ideal = conv(xs, sinc(t./T), 'same');
+end   
 figure;
-plot(t,ideal);
+t2 = linspace(-50,50,length(foh));
+plot(t2,foh);
 hold on;
 plot(t,x2);
 hold off;
-title('xn_2 - Ideal')
+title('xn_2 - FOH - T = 9')
 ylabel('x_2');
 xlabel('t[sec]');
-axis([-50 50 -2 2]);
-

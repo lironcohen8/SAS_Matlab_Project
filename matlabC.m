@@ -266,7 +266,7 @@ xlabel('t[sec]');
 T = 9;
 N = 10;
 L = T*N;
-points = 75;
+points = 100;
 t = linspace(-50,50,points);
 n = linspace(-50,50,points/T);
 x1 = sinc(t./6);
