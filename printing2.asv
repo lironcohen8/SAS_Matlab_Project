@@ -1,28 +1,28 @@
 clear;
 clearvars;
 
-%e - xn2 ideal
 T = 9;
 points = 200;
 t = linspace(-100,100,points);
 n = linspace(-100,100,points/T);
-x2 = cos(pi.*t./12)+sin(pi.*t./6);
-xn2 = cos(pi.*n./12)+sin(pi.*n./6);
+x1 = sinc(t./6);
+xn1 = sinc(n./6);
 j=1;
 for i = 1:length(t)
     if mod(i,T) == 0
-       xs(i) = xn2(j);
+       xs(i) = xn1(j);
        j = j+1;
     else
        xs(i) = 0;
     end
 end 
 ideal = conv(xs, sinc(t./T), 'same');
+axis([-50 50 -1.5 2.5]);
 figure;
 plot(t,ideal);
 hold on;
-plot(t,x2);
+plot(t,x1);
 hold off;
-title('xn_2 - Ideal')
-ylabel('x_2');
+title('xn_1 - Ideal - T = 9')
+ylabel('x_1');
 xlabel('t[sec]');

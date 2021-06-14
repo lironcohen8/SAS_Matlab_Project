@@ -164,6 +164,8 @@ hold off;
 title('xn_1 - Ideal')
 ylabel('x_1');
 xlabel('t[sec]');
+axis([-50 50 -0.4 1]);
+
 
 
 %e - xn2 ideal
@@ -191,6 +193,8 @@ hold off;
 title('xn_2 - Ideal')
 ylabel('x_2');
 xlabel('t[sec]');
+axis([-50 50 -2 2]);
+
 
 
 %f - d
@@ -332,6 +336,7 @@ hold off;
 title('xn_1 - Ideal - T = 9')
 ylabel('x_1');
 xlabel('t[sec]');
+axis([-50 50 -0.4 1]);
 
 
 %f - e - xn2 ideal
@@ -359,5 +364,6 @@ hold off;
 title('xn_2 - Ideal - T = 9')
 ylabel('x_2');
 xlabel('t[sec]');
+axis([-50 50 -2 2]);
 
 
