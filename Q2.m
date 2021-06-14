@@ -1,3 +1,7 @@
+clc;
+close all;
+clearvars;
+
 %Part B
 %a
 load('LPF.mat');

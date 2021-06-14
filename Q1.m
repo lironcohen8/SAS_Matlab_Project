@@ -1,3 +1,7 @@
+clc;
+close all;
+clearvars;
+
 %PartA
 
 %d

@@ -2,6 +2,9 @@ clc;
 close all;
 clearvars;
 
+%Part C
+
+
 %a
 t = linspace(-100,100,200);
 w = linspace(-pi,pi,200);
@@ -160,42 +163,42 @@ figure;
 plot(t,ideal);
 hold on;
 plot(t,x1);
-hold on;
-%stem(n,xn1);
-hold on;
-%plot(t,xs);
 hold off;
 title('xn_1 - Ideal')
 ylabel('x_1');
 xlabel('t[sec]');
-
-
+axis([-50 50 -0.4 1]);
 
 %e - xn2 ideal
 T = 2;
-N = 10;
-n = -50:50;
+points = 200;
+t = linspace(-100,100,points);
+n = linspace(-100,100,points/T);
+x2 = cos(pi.*t./12)+sin(pi.*t./6);
 xn2 = cos(pi.*n./12)+sin(pi.*n./6);
-t = linspace(-50,50,length(xn2));
-for i = 1:length(xn2)
+j=1;
+for i = 1:length(t)
     if mod(i,T) == 0
-        xs(i) = xn2(i);
+       xs(i) = xn2(j);
+       j = j+1;
     else
-        xs(i) = 0;
+       xs(i) = 0;
     end
 end 
 ideal = conv(xs, sinc(t./T), 'same');
 figure;
 plot(t,ideal);
 hold on;
-plot(n,xn2);
+plot(t,x2);
 hold off;
-title('xn_2 - Ideal');
-ylabel('xn_2');
-xlabel('n[sec]');
+title('xn_2 - Ideal')
+ylabel('x_2');
+xlabel('t[sec]');
+axis([-50 50 -2 2]);
 
+
+%f
 %f - d
-
 n = -50:50;
 xn1 =  sinc(3.*n./2);
 fft_xn1= fftshift(fft(xn1));
@@ -264,7 +267,7 @@ xlabel('t[sec]');
 T = 9;
 N = 10;
 L = T*N;
-points = 75;
+points = 100;
 t = linspace(-50,50,points);
 n = linspace(-50,50,points/T);
 x1 = sinc(t./6);
@@ -289,7 +292,7 @@ xlabel('t[sec]');
 T = 9;
 N = 10;
 L = T*N;
-points = 75;
+points = 100;
 t = linspace(-50,50,points);
 n = linspace(-50,50,points/T);
 x2 = cos(pi.*t./12)+sin(pi.*t./6);
@@ -311,48 +314,57 @@ xlabel('t[sec]');
 
 %f - e - xn1 ideal
 T = 9;
-N = 10;
-n = -50:50;
-xn1 =  sinc(T.*n./6);
-t = linspace(-50,50,length(xn1));
-for i = 1:length(xn1)
+points = 200;
+t = linspace(-100,100,points);
+n = linspace(-100,100,points/T);
+x1 = sinc(t./6);
+xn1 = sinc(n./6);
+j=1;
+for i = 1:length(t)
     if mod(i,T) == 0
-        xs(i) = xn1(i);
+       xs(i) = xn1(j);
+       j = j+1;
     else
-        xs(i) = 0;
+       xs(i) = 0;
     end
 end 
 ideal = conv(xs, sinc(t./T), 'same');
 figure;
 plot(t,ideal);
 hold on;
-plot(n,xn1);
+plot(t,x1);
 hold off;
-title('xn_1 - Ideal - T = 9');
-ylabel('xn_1');
-xlabel('n[sec]');
+title('xn_1 - Ideal - T = 9')
+ylabel('x_1');
+xlabel('t[sec]');
+axis([-50 50 -0.4 1]);
 
 
 %f - e - xn2 ideal
 T = 9;
-N = 10;
-n = -50:50;
-xn2 = cos(T.*pi.*n./12)+sin(T.*pi.*n./6);
-t = linspace(-50,50,length(xn2));
-for i = 1:length(xn2)
+points = 200;
+t = linspace(-100,100,points);
+n = linspace(-100,100,points/T);
+x2 = cos(pi.*t./12)+sin(pi.*t./6);
+xn2 = cos(pi.*n./12)+sin(pi.*n./6);
+j=1;
+for i = 1:length(t)
     if mod(i,T) == 0
-        xs(i) = xn2(i);
+       xs(i) = xn2(j);
+       j = j+1;
     else
-        xs(i) = 0;
+       xs(i) = 0;
     end
 end 
 ideal = conv(xs, sinc(t./T), 'same');
 figure;
 plot(t,ideal);
 hold on;
-plot(n,xn2);
+plot(t,x2);
 hold off;
-title('xn_2 - Ideal - T = 9');
-ylabel('xn_2');
-xlabel('n[sec]');
+title('xn_2 - Ideal - T = 9')
+ylabel('x_2');
+xlabel('t[sec]');
+axis([-50 50 -2 2]);
+
 
