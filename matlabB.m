@@ -42,8 +42,6 @@ title('Transfer Function H6')
 xlabel('\omega [rad/sec]');
 ylabel('H6');
 
-close;
-
 %b
 w = linspace(-pi,pi,2*1000+1);
 n = -1000:1000;
@@ -106,6 +104,7 @@ ylabel('Y_6(e^{j\omega})');
 %e
 n = -50:50;
 xn = cos((2.*pi./5).*n) + cos(((pi)./5).*n);
+
 %h2
 yn2 = conv(xn,h2);
 subplot(2,2,1);
